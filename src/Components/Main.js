@@ -12,7 +12,6 @@ class Main extends Component {
 
     componentDidMount(){
         // prevent reloading from getting errors, when reloading, the components have not been loaded yet
-        console.log(this.state)
         this.props.startLoadingPost().then(() => {
             this.setState({loading: false})
         })

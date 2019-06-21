@@ -18,7 +18,7 @@ class Single extends Component {
                 <Comment startAddingComment={this.props.startAddingComment} comments={comments} id={id} />
             </div>
         } else {
-            return <h1> ..no post found </h1>
+            return <h1> ...no post found </h1>
         }
     }
 }
