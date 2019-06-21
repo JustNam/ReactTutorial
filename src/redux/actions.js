@@ -18,6 +18,8 @@ export function startLoadingPost(){
                 posts.push(childSnapshot.val())
             })
             dispatch(loadPost(posts))
+        }).catch((error) => {
+            console.log(error)
         })
     }
 }
@@ -26,6 +28,8 @@ export function startRemovingPost(index, id){
     return (dispatch) => {
         return database.ref(`posts/${id}`).remove().then(()=>{
             dispatch(removePost(index))
+        }).catch((error) => {
+            console.log(error)
         })
     }
 }
@@ -34,6 +38,8 @@ export function startAddingComment(comment, postId){
     return (dispatch) => {
         return database.ref(`comments/${postId}`).push(comment).then(()=> {
             dispatch(addComment(comment, postId))
+        }).catch((error) => {
+            console.log(error)
         })
     }
 }
@@ -46,6 +52,8 @@ export function startLoadingComments(){
                 comments[childSnapshot.key] = Object.values(childSnapshot.val())
             })
             dispatch(loadComments(comments))
+        }).catch((error) => {
+            console.log(error)
         })
     }
 }
