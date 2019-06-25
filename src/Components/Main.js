@@ -11,15 +11,12 @@ class Main extends Component {
     state = {loading: true}
 
     componentDidMount(){
-        // prevent reloading from getting errors, when reloading, the components have not been loaded yet
-        this.props.startLoadingPost().then(() => {
-            this.setState({loading: false})
-        })
+        this.props.requestPosts()
+
         this.props.startLoadingComments()
     }
 
     render() {
-     
         return <div>
             <h1>
                 <Link to='/'>PhotoWall</Link>

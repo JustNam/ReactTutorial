@@ -1,6 +1,7 @@
 import {database} from '../database/config'
 
 export function startAddingPost(post) {
+    //  dispatch is provided internally
     return (dispatch) => {
         return database.ref('posts').update({[post.id]: post}).then(()=>{
             dispatch(addPost(post))
@@ -91,5 +92,33 @@ export function loadPost(posts){
     return {
         type: 'LOAD_POSTS',
         posts
+    }
+}
+
+// New actions for middleware
+export function requestPosts(){
+    return {
+        type: 'REQUEST_POSTS',
+        promise: database.ref('posts').once('value')
+    }
+}
+
+export function loadPostProcessing(){
+    return {
+        type: 'LOAD_POSTS_PROCESSING'
+    }
+}
+
+export function loadPostSuccess(result){
+    return {
+        type: 'LOAD_POSTS_SUCCESS',
+        result,
+    }
+}
+
+export function loadPostfailure(error){
+    return {
+        type: 'LOAD_POSTS_FAILURE',
+        error,
     }
 }

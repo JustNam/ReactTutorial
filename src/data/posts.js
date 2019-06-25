@@ -1,3 +1,7 @@
-const posts = []
+const initalPostState = {
+    data: [],
+    isLoading: false,
+    error: ""
+}
 
-export default posts 
+export default initalPostState
