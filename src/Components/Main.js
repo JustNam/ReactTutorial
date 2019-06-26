@@ -5,15 +5,14 @@ import PhotoWall from './PhotoWall'
 import Single from './Single'
 import AddPhoto from './AddPhoto'
 import { Link } from 'react-router-dom'
-
+import Photo from './Photo'
 class Main extends Component {
 
-    state = {loading: true}
+    state = { loading: true }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.requestPosts()
-
-        this.props.startLoadingComments()
+        console.log(2)
     }
 
     render() {
@@ -21,12 +20,23 @@ class Main extends Component {
             <h1>
                 <Link to='/'>PhotoWall</Link>
             </h1>
-            <Route exact path='/' render={() => (
-                <div>
-                    {/* Add state to component */}
-                    <PhotoWall {...this.props} />
-                </div>
-            )} />
+            <Route exact path='/' render={() => {
+                console.log("render")
+                if (this.props.posts.data) {
+                    console.log(this.props)
+                    console.log("exist")
+                }
+                return (
+                    <div>
+                        {/* Add state to component */}
+                        {/* <PhotoWall {...this.props} /> */}
+                        <div className="photo-grid">
+                            {this.props.posts.data
+                                .map((post, index) => <Photo key={index} post={post} {...this.props} index={index} />)}
+                        </div>
+                    </div>
+                )
+            }} />
 
             <Route path='/AddPhoto' render={({ history }) => (
                 <AddPhoto {...this.props} onHistory={history} />

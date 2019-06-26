@@ -1,9 +1,8 @@
 import * as actionCreator from '../redux/actions'
 
-export const loadPostsMiddleware = store => next => action => {
+export const loadPostsMiddleware = dispatch => next => action => {
     if (!action.promise) return next(action)
     next(actionCreator.loadPostProcessing())
-
     action.promise
         .then((snapshot) => {
             let posts = []
